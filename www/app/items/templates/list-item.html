@@ -1,0 +1,40 @@
+<div class="card">
+	<div class="item item-text-wrap product-image" ng-click="itemClicked(item)">
+		<img ng-attr-src="{{item.imageUrl}}" alt="" ng-if="item.imageUrl">
+		<img src="img/items/fallback.png" alt="" ng-if="! item.imageUrl">
+	</div>
+	<div class="item item-text-wrap details">
+		<div class="row">
+			<div class="col left">
+				<i class="fa fa-list-alt"></i> {{item.itemNumber}}
+			</div>
+			<div class="col right">
+        <span ng-if="item.quantityAvailable > 0">
+          <i class="fa fa-columns icon"></i> {{item.quantityAvailable | number}}
+        </span>
+        <span ng-if="item.quantityAvailable == 0">
+          <i class="fa fa-columns icon"></i> {{ 'OUT_OF_STOCK' | translate }}
+        </span>
+			</div>
+		</div> 
+	</div>
+	<div class="item item-divider price row">
+		
+		<div class="col left">
+			<div ng-if="! useQuantity">
+				<span class="big">{{item.priceLevelData.price | currency }}</span> <span class="small">(${{item.priceLevelData.unitPrice | number }})</span>
+			</div>
+
+			<div ng-if="useQuantity">
+				<span class="big">{{quantity * item.priceLevelData.price | currency }}</span> <span class="small">({{quantity}} x {{item.priceLevelData.price | currency }})</span>
+			</div>
+		</div>
+
+		<div class="col right" ng-if="canAddToOrder">
+			<button class="button button-small button-positive" ng-click="addItemToOrder(item)">{{ 'ADD_TO_ORDER' | translate }}</button>
+		</div>
+		<div class="col right" ng-if="canEditQuantity">
+			<button class="button button-small button-positive" ng-click="editOrderItem(order, item)">{{ 'EDIT_QUANTITY' | translate }}</button>
+		</div>
+	</div>
+</div>

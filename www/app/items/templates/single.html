@@ -1,0 +1,48 @@
+<ion-view view-title="{{ 'PRODUCT_DETAILS' | translate }}" id="product" cache-view="false">
+	<ng-switch on="currentLanguage">
+		<ion-nav-title ng-switch-when="en">{{item.localization.en.description}}</ion-nav-title>
+		<ion-nav-title ng-switch-when="fr">{{item.localization.fr.description}}</ion-nav-title>
+	</ng-switch>
+	<ion-content>
+		<div class="padding borderbottom" id="summary">
+			<div class="row">
+				<div class="col-75">
+					<img ng-attr-src="{{item.imageUrl}}" alt="" ng-if="item.imageUrl">
+					<img src="img/items/fallback.png" alt="" ng-if="! item.imageUrl">
+				</div>
+				<div class="col-25">
+					<p class="legend">{{ 'UNIT_OF_MEASURE' | translate }}</p>
+					<p class="number">{{item.priceLevelData.unitOfMeasure}}</p>
+					<p class="legend">{{ 'UNIT_PRICE' | translate }}</p>
+					<p class="number">${{item.priceLevelData.unitPrice | number}}</p>
+					<p class="legend">{{ 'PRICE' | translate }}</p>
+					<p class="number">{{item.priceLevelData.price | currency}}</p>
+					<button ng-show="item.quantityAvailable != 0" class="button button-light" ng-click="addToOrder()">{{ 'ADD_TO_ORDER' | translate }}</button>
+					<div class="legend" ng-show="item.quantityAvailable == 0">
+						<i style="font-size: 50px" class="icon ion-alert-circled"></i>
+						<p class="legend">		
+							{{ 'OUT_OF_STOCK' | translate }}
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="padding borderbottom" id="details">
+				
+			<ng-switch on="currentLanguage">
+				<p class="product-name" ng-switch-when="en">{{item.localization.en.description}}<br><code>{{item.itemNumber}}</code></p>
+				<p class="product-name" ng-switch-when="fr">{{item.localization.fr.description}}<br><code>{{item.itemNumber}}</code></p>
+			</ng-switch>
+			<p><span class="legend"><i class="fa fa-columns icon"></i> {{ 'UNIT_OF_MEASURE' | translate }}:</span> <span class="number">{{item.priceLevelData.unitOfMeasure}}</span> <span class="legend">{{ 'QUANTITY_PER_UOM' | translate }}:</span> <span class="number">{{(item.priceLevelData.price / item.priceLevelData.unitPrice) | number}}</span></p>
+
+
+<!--
+			<p><span class="legend"><i class="fa fa-arrows-h icon"></i> Product Dimensions:</span> <span class="number">XXX mm</span></p>
+
+			<p><span class="legend"><i class="fa fa-inbox icon"></i> Cases per pallet:</span> <span class="number">X</span> <span class="legend">Pallet horizontal:</span> <span class="number">X</span> <span class="legend">Pallet vertical:</span> <span class="number">X</span></p>
+			-->
+		
+		</div>
+	</ion-content>
+</ion-view>

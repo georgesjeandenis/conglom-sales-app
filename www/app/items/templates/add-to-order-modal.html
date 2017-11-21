@@ -1,0 +1,32 @@
+<ion-modal-view cache-view="false">
+	<ion-header-bar>
+		<h1 class="title">{{ 'ADD_ITEM_TO_ORDER' | translate }}</h1>
+	</ion-header-bar>
+	<ion-content>
+		<div class="list">
+			<div class="item item-input">
+				<span class="input-label">{{ 'ITEM' | translate }}</span>
+				{{itemsAddToOrder.item.itemNumber}}
+			</div>
+			<div class="item item-input item-select" ng-if="itemsAddToOrder.orders !== null">
+				<span class="input-label">{{ 'ORDER' | translate }}</span>
+				<select ng-model="itemsAddToOrder.order" required>
+					<option value="">-- {{ 'PLEASE_SELECT' | translate }} --</option>
+					<option ng-repeat="order in itemsAddToOrder.orders" ng-model="order">{{order.orderNumber}}</option>
+					<option value="__new__">{{ 'CREATE_NEW_ORDER' | translate }}</option>
+				</select>
+			</div>
+			<div class="item item-input">
+				<span class="input-label">{{ 'QUANTITY' | translate }}</span>
+				<input type="number" min="0" max="{{itemsAddToOrder.item.quantityAvailable}}" ng-model="itemsAddToOrder.quantity">
+			</div>
+		</div>
+	</ion-content>
+	<ion-footer-bar>
+		<div>
+			<button class="button" ng-click="itemsAddToOrder.close()">{{ 'UNDO' | translate }}</button>
+			<button class="button button-assertive" ng-if="itemsAddToOrder.mode == 'edit'" ng-click="itemsAddToOrder.removeItem()">{{ 'REMOVE' | translate }}</button>
+			<button class="button button-positive" ng-click="itemsAddToOrder.save()">{{ 'SAVE' | translate }}</button>
+		</div>
+	</ion-footer-bar>
+</ion-modal-view>

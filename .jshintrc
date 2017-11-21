@@ -1,0 +1,17 @@
+{
+	// JSHint configuration file based
+	// Only non-default values are in this file
+	// See https://github.com/jshint/jshint/blob/master/examples/.jshintrc for defaults
+	// See http://jshint.com/docs/ for more details
+
+	"curly"         : true,
+	"latedef"       : "nofunc",
+	"globalstrict"  : true,
+	"validthis"     : true,
+	"laxbreak"      : true,
+	"globals" : {
+		"angular": false,
+		"window": false,
+		"console": false
+	}
+}

@@ -1,0 +1,31 @@
+<ion-view view-title="{{ 'SETTINGS' | translate }}" id="settings">
+	<ion-content>
+		<div class="padding">
+			<p>{{ 'LANGUAGE' | translate }}</p>
+      <ion-list>
+        <ion-radio ng-model="language" ng-value="'fr'" ng-click="switchLanguage('fr')" >{{ 'FRENCH' | translate }}</ion-radio>
+        <ion-radio ng-model="language" ng-value="'en'" ng-click="switchLanguage('en')" >{{ 'ENGLISH' | translate }}</ion-radio>
+      </ion-list>
+
+		</div> <!-- .padding -->
+
+		<div class="padding">
+
+			<p>Drop local storage tables</p>
+			<div class="list">
+				<button class="button item button-block" ng-click="dropTable('customers')">Customers</button>
+				<button class="button item button-block" ng-click="dropTable('items')">Items</button>
+				<button class="button item button-block" ng-click="dropTable('pricelists')">Price lists</button>
+				<button class="button item button-block" ng-click="dropTable('orders')">Orders</button>
+        <button class="button item button-block" ng-click="dropTable('orders_items')">Orders/Items</button>
+        <button class="button item button-block" ng-click="dropTable('settings')">Orders/Items</button>
+			</div>
+
+		</div> <!-- .padding -->
+
+		<div class="padding action">
+			<button class="button" ng-click="logout()">{{ 'LOGOUT_PLACEHOLDER' | translate }}</button>
+		</div> <!-- .padding -->
+
+	</ion-content>
+</ion-view>

@@ -1,0 +1,68 @@
+<ion-view view-title="{{ 'ITEMS' | translate }}" id="catalogue" cache-view="false">
+	<ion-content>
+		<ion-refresher
+			pulling-text="{{ 'PULL_TO_REFRESH_ITEMS' | translate }}"
+			on-refresh="fetchItems()"
+			ng-if="customer">
+		</ion-refresher>
+		<div ng-hide="customer" class="padding centered">
+			<p>{{ 'SELECT_CUSTOMER_FIRST' | translate }}</p>
+			<p><button ng-click="showCustomerSelector()" class="button button-calm">{{ 'SELECT_CUSTOMER' | translate }}</button></p>
+		</div>
+		<div ng-show="customer">
+			<div class="row">
+				<div class="col col-50 list">
+					<div class="">
+						<span class="input-label">{{ 'CURRENT_CUSTOMER' | translate }}</span>
+						<div>
+							<span style="vertical-align:middle">{{customer.name}}</span>
+							<button class="button button-small" ng-click="showCustomerSelector()" style="vertical-align:middle">{{ 'CHANGE' | translate }}</button>
+						</div>
+					</div>
+				</div>
+				<div class="col col-50 list" ng-show="items.length > 0">
+					<div class="item item-input">
+						<form ng-submit="doSearch()">
+							<input type="search" placeholder="{{ 'SEARCH_ITEMS' | translate }}" ng-model="search.value">
+						</form>
+					</div>
+				</div>
+			</div>
+			<div ng-show="items.length == 0 &amp;&amp; ! firstLoading" class="centered padding">
+				<h2>{{ 'MUST_DOWNLOAD_ITEM_LIST' | translate }}</h2>
+				<button ng-click="fetchItems()" class="button button-calm icon-left ion-refresh">
+						{{ 'DOWNLOAD_FROM_STORE' | translate }}
+					</button>
+			</div>
+
+			<div class="" id="list-of-products" ng-show="items.length > 0">
+
+				<div ng-repeat="unusedVar in items">
+					<div class="row" ng-if="$index % 3 == 0" ng-init="outerIndex = $index">
+						<conglom-list-item
+							class="col-33"
+							ng-if="items[ outerIndex ]"
+							item="items[ outerIndex ]">
+						</conglom-list-item>
+
+						<conglom-list-item
+							class="col-33"
+							ng-if="items[ outerIndex + 1 ]"
+							item="items[ outerIndex + 1 ]">
+						</conglom-list-item>
+
+						<conglom-list-item
+							class="col-33"
+							ng-if="items[ outerIndex + 2 ]"
+							item="items[ outerIndex + 2 ]">
+						</conglom-list-item>
+					</div>
+				</div>
+
+				<ion-infinite-scroll on-infinite="loadMoreItems()" distance="100px" immediate-check="true" ng-if="moreItemsToLoad()">
+	  			</ion-infinite-scroll>
+			</div>
+		</div>
+
+	</ion-content>
+</ion-view>

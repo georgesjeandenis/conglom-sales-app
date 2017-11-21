@@ -1,0 +1,6 @@
+<div>
+	<ul>
+		<li class="conglomTabs-tab" ng-repeat="pane in panes" ng-click="showPane(pane)" ng-class="{'conglomTabs-tab-active':pane.selected}"><span>{{pane.title}}</span></li>
+	</ul>
+	<div ng-transclude class="conglomTabs-panes"></div>
+</div>

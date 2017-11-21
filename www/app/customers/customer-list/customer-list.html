@@ -1,0 +1,34 @@
+<ion-refresher
+	pulling-text="{{ 'PULL_TO_REFRESH_CUSTOMERS' | translate }}"
+	on-refresh="fetchCustomers()">
+</ion-refresher>
+<div ng-show="customers.length == 0 &amp;&amp; ! firstLoading" class="centered padding">
+	<h2>{{ 'DOWNLOAD_CUSTOMER_FIRST' | translate }}</h2>
+	<button ng-click="fetchCustomers()" class="button button-calm icon-left ion-refresh">
+			{{ 'DOWNLOAD_FROM_STORE' | translate }}
+		</button>
+</div>
+<div ng-show="customers.length > 0">
+	<div class="row">
+		<div class="col col-50 col-offset-50 list">
+			<div class="item item-input">
+				<form ng-submit="doSearch()">
+					<input type="search" ng-model="search.value" placeholder="{{ 'SEARCH_CUSTOMERS' | translate }}">
+				</form>
+			</div>
+		</div>
+	</div>
+	<ion-list>
+		<ion-item class="item-remove-animate item-icon-right" ng-repeat="customer in customers" type="item-text-wrap" ng-click="customerSelected( customer )">
+      <div ng-show="{{customer.onHold == '1'}}" class="list-icon-right">
+        <i class="icon ion-alert-circled"></i> 
+        <p>{{ 'ON_HOLD' | translate }}</p>       
+      </div>
+			<h2>{{customer.name}} <span class="legend">{{customer.customerId}} {{customer.onHold}}</span></h2>
+			<p><i class="fa fa-map-o"></i> {{customer.billingAddress | customerAddress}}</p>
+      <i class="icon ion-chevron-right icon-accessory"></i>
+		</ion-item>
+	</ion-list>
+	<ion-infinite-scroll on-infinite="loadMoreCustomers()" distance="100px" immediate-check="true" ng-if="moreCustomersToLoad()">
+		</ion-infinite-scroll>
+</div>

@@ -1,0 +1,12 @@
+{
+  "name": "conglom",
+  "app_id": "34441697",
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*"
+  ]
+}

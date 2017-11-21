@@ -1,0 +1,15 @@
+<ion-modal-view>
+	<ion-header-bar class="bar-assertive">
+		<h1 class="title">{{ 'ERROR' | translate }}</h1>
+	</ion-header-bar>
+	<ion-content>
+		<div class="padding">
+			<p>{{ 'ERROR_OCCURRED' | translate }}:</p>
+			<p>{{errorMessage}}</p>
+			<p></p>
+		</div>
+	</ion-content>
+	<ion-footer-bar>
+		<button class="button button-positive pull-right" ng-click="closeErrorModal()">{{ 'CLOSE' | translate }}</button>
+	</ion-footer-bar>
+</ion-modal-view>

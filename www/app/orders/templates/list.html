@@ -1,0 +1,36 @@
+<ion-view view-title="{{ 'ORDERS_TITLE' | translate }}" id="history" cache-view="false">
+	<ion-nav-buttons side="secondary">
+		<button ui-sref="main.orders-new" class="button button-calm icon-left ion-plus-round">
+			{{ 'CREATE_AN_ORDER' | translate }}
+		</button>
+	</ion-nav-buttons>
+	<ion-content>
+		<div class="row">
+			<div class="col col-50 col-offset-50 list">
+				<div class="item item-input">
+					<form ng-submit="doSearch()">
+						<input type="search" placeholder="{{ 'SEARCH_ORDERS' | translate }}" ng-model="search.value">
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="padding">
+			<conglom-tabs>
+				<conglom-tab title="In progress" id="inprogress">
+					<p ng-show="! orders.inProgress.length" class="padding centered">{{ 'NO_ORDER_IN_PROGRESS' | translate }}</p>
+					<div ng-repeat="order in orders.inProgress" class="order-list in-progress">
+						<ng-include src="'app/orders/templates/list-item.html'" ui-sref="main.orders-fill({orderId:order.localStorageId})"></ng-include>
+					</div>
+				</conglom-tab>
+
+				<conglom-tab title="Finalized" id="done">
+					<p ng-show="! orders.pushed.length" class="padding centered">{{ 'NO_ORDER_FINALIZED' | translate }}</p>
+					<div ng-repeat="order in orders.pushed" class="order-list completed">
+						<ng-include src="'app/orders/templates/list-item.html'" ui-sref="main.orders-view({orderId:order.localStorageId})"></ng-include>
+					</div>
+				</conglom-tab>
+			</conglom-tabs>
+		</div>
+	</ion-content>
+</ion-view>

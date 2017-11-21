@@ -1,0 +1,30 @@
+<ion-nav-bar class="bar-stable" id="header">
+	<ion-nav-back-button>{{ 'BACK' | translate }}</ion-nav-back-button>
+</ion-nav-bar>
+
+<ion-nav-view class="has-tabs"></ion-nav-view>
+
+<div class="tabs-icon-top tabs-color-active-positive tabs-vertical tabs-bottom tabs-standard">
+	<div class="tab-nav tabs">
+
+		<a class="tab-item" icon-on="ion-pricetags" icon-off="ion-pricetags" ui-sref="main.orders-list">
+			<i class="icon ion-pricetags"></i>
+			<span class="tab-title ng-binding">{{ 'ORDERS_TITLE' | translate }}</span>
+		</a>
+
+		<a class="tab-item" icon-on="ion-ios-people-outline" icon-off="ion-ios-people-outline" ui-sref="main.customer-list">
+			<i class="icon ion-ios-people-outline"></i>
+			<span class="tab-title ng-binding">{{ 'CUSTOMERS' | translate }}</span>
+		</a>
+
+		<a class="tab-item" icon-on="ion-ios-paper-outline" icon-off="ion-ios-paper-outline" ui-sref="main.items-list">
+			<i class="icon ion-ios-paper-outline"></i>
+			<span class="tab-title ng-binding">{{ 'CATALOG' | translate }}</span>
+		</a>
+
+		<a class="tab-item" icon-on="ion-ios-gear-outline" icon-off="ion-ios-gear-outline" ui-sref="main.settings">
+			<i class="icon ion-ios-gear-outline"></i>
+			<span class="tab-title ng-binding">{{ 'SETTINGS' | translate }}</span>
+		</a>
+	</div>
+</div>

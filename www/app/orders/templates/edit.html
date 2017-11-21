@@ -1,0 +1,46 @@
+<ion-view id="order-edit" cache-view="false">
+  <ion-nav-title>{{ isNew &amp;&amp; ('NEW_ORDER' | translate) || ('EDIT_ORDER' | translate) + order.orderNumber }}</ion-nav-title>
+	<ion-content>
+
+		<div class="padding">
+			<h1 ng-if="! isNew">{{ 'EDIT_ORDER_INFO' | translate }}</h1>
+			<h1 ng-if="isNew">{{ 'NEW_ORDER_INFO' | translate }}</h1>
+		</div>
+		<div class="padding">
+			<div class="list">
+				<div class="item item-input item-stacked-label">
+					<label>
+						<span class="input-label">{{ 'CUSTOMER' | translate }}</span>
+					</label>
+					<div>
+						<span style="text-decoration:underline" ng-if="! order.customer" ng-click="selectCustomer()">{{ 'SELECT' | translate }}</span>
+						<span ng-if="order.customer">{{order.customer.name}}
+							<span style="text-decoration:underline" ng-click="selectCustomer()" ng-if="isNew">{{ 'CHANGE' | translate }}</span>
+						</span>
+					</div>
+				</div>
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">{{ 'ORDER_NUMBER' | translate }}</span>
+					<input type="text" ng-model="order.orderNumber">
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">{{ 'SHIPPING_METHOD' | translate }}</span>
+					<input type="text" ng-model="order.shippingMethod">
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">{{ 'ORDER_DATE' | translate }}</span>
+					<input type="date" ng-model="order.date">
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">{{ 'REQUEST_SHIP_DATE' | translate }}</span>
+					<input type="date" ng-model="order.requestedShipDate">
+				</label>
+			</div>
+			<button ng-if="! isNew" class="button primary" ng-click="save()">{{ 'SAVE_ORDER' | translate }}</button>
+			<button ng-if="isNew" class="button primary" ng-click="save()">{{ 'CREATE_ORDER' | translate }}</button>
+
+		</div>
+
+	</ion-content>
+</ion-view>

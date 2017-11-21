@@ -1,0 +1,65 @@
+<ion-view view-title="{{ 'ORDER_SUMMARY_TITLE' | translate }}" id="finalize">
+	<ion-content>
+
+		<div class="padding borderbottom" id="billing">
+			<h1>{{order.customer.name}}</h1>
+			<h2>{{order.customer.customerId}}</h2>
+		</div>
+		<div class="padding address">
+			<p class="section">{{ 'BILLING_ADDRESS' | translate }}</p>
+			<p><i class="fa fa-map-o"></i> {{order.customer.billingAddress | customerAddress}}</p>
+			<p class="section">{{ 'SHIPPING_ADDRESS' | translate }}</p>
+			<p><i class="fa fa-truck"></i> {{order.customer.shippingAddress | customerAddress}}</p>
+			<p class="section">{{ 'CONTACT' | translate }}</p>
+			<p><i class="fa fa-user"></i> {{order.customer.billingAddress.contactName}}</p>
+		</div>
+
+		<div class="padding borderbottom" id="details">
+			<div class="row">
+				<div class="col">
+					<span class="legend">{{ 'ORDER_NO' | translate }}</span>  {{order.orderNumber}}
+				</div>
+				<div class="col">
+					<span class="legend">{{ 'ORDER_DATE' | translate }}</span>  {{order.date | date:'dd/MM/yyyy'}}
+				</div>
+				<div class="col">
+					<span class="legend">{{ 'REQUEST_SHIP_DATE' | translate }}</span>  {{order.requestedShipDate | date:'dd/MM/yyyy'}}
+				</div>
+			</div>
+		</div>
+
+		<div class="list">
+			<div class="item" ng-repeat="itemData in order.items" ng-init="item = itemData.item">
+				<div class="row">
+					<div class="col col-60">
+						<p class="legend">{{item.itemNumber}}</p>
+						<p>{{item.localization.en.description}}</p>
+						<p><span class="legend">Unit of measure:</span> <span class="number">{{item.priceLevelData.unitOfMeasure}}</span> <span class="legend">{{ 'UNIT_PRICE' | translate }}:</span> <span class="number">{{item.priceLevelData.unitPrice | currency}}</span> <span class="legend">{{ 'PRICE' | translate }}:</span> <span class="number">{{item.priceLevelData.price | currency}}</span></p>
+					</div>
+					<div class="col col-20 col-center">
+						<p class="legend">{{ 'QTY' | translate }}</p>
+						<p class="bignumber">{{itemData.quantity}}</p>
+					</div>
+					<div class="col col-20 col-center">
+						<p class="legend">{{ 'TOTAL' | translate }}</p>
+						<p class="bignumber">{{itemData.quantity * item.priceLevelData.price | currency}}</p>
+					</div>
+					<i class="ion-ios-arrow-right"></i>
+				</div>
+			</div>
+		</div>
+
+	</ion-content>
+	<ion-footer-bar align-title="left" class="">
+		<div class="row">
+			<div class="col">
+				<h2>{{order.calculateNbItems()}}</h2>
+				<p>{{ 'TOTAL_ITEMS' | translate }}</p>
+			</div>
+			<div class="col">
+				<h2>{{order.calculateTotalPrice() | currency}}</h2>
+				<p>{{ 'TOTAL_AMOUNT' | translate }}</p>
+			</div>
+		</div>
+	</ion-footer-bar>
+</ion-view>

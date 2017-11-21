@@ -1,0 +1,90 @@
+<ion-view id="order" cache-view="false">
+	<ion-nav-title>{{order.customer.name}}</ion-nav-title>
+	<ion-content>
+
+		<div class="padding borderbottom" id="summary">
+			<div class="row">
+				<div class="col" id="title">
+					{{ 'ORDER_SUMMARY' | translate }}
+				</div>
+				<div class="col">
+					<span class="big-number">{{order.calculateNbItems()}}</span> 
+					<span>{{ 'NUMBER_OF_ITEMS' | translate }}</span>
+				</div>
+				<div class="col">
+					<span class="big-number">{{order.calculateTotalPrice() | currency}}</span> <span>{{ 'TOTAL_AMOUNT' | translate }}</span>
+				</div>
+				<div class="col no-padding">
+					<div class="row">
+						<div class="col buttons" id="delete" ng-click="deleteOrder()">
+							<i class="fa fa-trash"></i> {{ 'DELETE' | translate }}
+						</div>
+						<div class="col buttons" id="finalize" ng-click="send()">
+							<i class="fa fa-floppy-o"></i> {{ 'FINALIZE_AND_SEND' | translate }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="padding borderbottom" id="details">
+			<div class="row">
+				<div class="col">
+					<span class="legend">{{ 'ORDER_NO' | translate }}</span> {{order.orderNumber}}
+				</div>
+				<div class="col">
+					<span class="legend">{{ 'ORDER_DATE' | translate }}</span>  {{order.date | date : shortDate}}
+				</div>
+				<div class="col">
+					<span class="legend">{{ 'REQUEST_SHIP_DATE' | translate }}</span>  {{order.requestedShipDate | date : shortDate}}
+				</div>
+				<div class="col right">
+					<a class="edit" ui-sref="main.orders-edit({ orderId: order.localStorageId })">{{ 'EDIT' | translate }}</a>
+				</div>
+			</div>
+		</div>
+
+		<div class="padding" id="list-of-products">
+
+			<div ng-repeat="unusedVar in order.items">
+				<div class="row" ng-if="$index % 3 == 0" ng-init="outerIndex = $index">
+					<conglom-list-item
+						class="col-33"
+						ng-if="order.items[ outerIndex ].item"
+						item="order.items[ outerIndex ].item"
+						order="order"
+						quantity="order.items[ outerIndex ].quantity">
+					</conglom-list-item>
+
+					<conglom-list-item
+						class="col-33"
+						ng-if="order.items[ outerIndex + 1 ].item"
+						item="order.items[ outerIndex + 1 ].item"
+						order="order"
+						quantity="order.items[ outerIndex + 1 ].quantity">
+					</conglom-list-item>
+
+					<conglom-list-item
+						class="col-33"
+						ng-if="order.items[ outerIndex + 2 ].item"
+						item="order.items[ outerIndex + 2 ].item"
+						order="order"
+						quantity="order.items[ outerIndex + 2 ].quantity">
+					</conglom-list-item>
+
+					<div
+						class="col-33"
+						ng-if="outerIndex &gt;= order.items.length - 3"
+						ng-include="'app/orders/templates/add-item.html'"
+						ng-click="addItems()">
+					</div>
+				</div>
+			</div>
+
+			<div class="row" ng-if="order.items.length % 3 == 0">
+				<div class="col-33" ng-include="'app/orders/templates/add-item.html'" ng-click="addItems()"></div>
+			</div>
+		</div>
+
+	</ion-content>
+</ion-view>

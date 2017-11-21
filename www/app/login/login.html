@@ -1,0 +1,28 @@
+<ion-view view-title="{{ 'LOGIN_PLACEHOLDER' | translate }}" id="login">
+	<ion-content>
+
+		<div class="padding">
+
+			<div class="placeholder">
+				<img src="img/placeholder.png" alt="">
+			</div> <!-- .img -->
+
+			<div class="list">
+				<label class="item item-input">
+					<span class="input-label">{{ 'LOGIN_PLACEHOLDER' | translate }}</span>
+					<input type="text" ng-model="user.username" required>
+				</label>
+				<label class="item item-input">
+					<span class="input-label">{{ 'PASSWORD_PLACEHOLDER' | translate }}</span>
+					<input type="password" ng-model="user.password" required>
+				</label>
+			</div>
+
+			<div ng-show="invalidLoginCredentials" style="color: #c00">{{ 'INVALID_LOGIN' | translate }}</div>
+
+			<button class="button button-block button-positive" ng-click="signIn()">{{ 'SIGN_IN_BUTTON' | translate }}</button>
+
+		</div> <!-- .padding -->
+
+	</ion-content>
+</ion-view>

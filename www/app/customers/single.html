@@ -1,0 +1,59 @@
+<ion-view view-title="{{ 'CUSTOMER_DETAILS' | translate }}" id="customer" cache-view="false">
+	<ion-content>
+		<div class="padding borderbottom">
+			<h1>{{customer.name}}</h1>
+			<h2>{{customer.customerId}}</h2>
+		</div>
+		<div class="padding borderbottom address"
+			<p class="section">{{ 'BILLING_ADDRESS' | translate }}</p>
+			<p><i class="fa fa-map-o"></i> {{customer.billingAddress | customerAddress}}</p>
+			<p class="section">{{ 'SHIPPING_ADDRESS' | translate }}</p>
+			<p><i class="fa fa-truck"></i> {{customer.shippingAddress | customerAddress}}</p>
+		</div>
+
+		<div class="padding">
+			<div class="row">
+				<div class="col-50">
+					<p class="section">{{ 'CONTACT_INFO' | translate }}</p>
+					<p ng-if="customer.billingAddress.contactName"><i class="fa fa-user"></i> {{customer.billingAddress.contactName}}</p>
+					<p ng-if="customer.billingAddress.phone1"><i class="fa fa-phone"></i> {{customer.billingAddress.phone1}}</p>
+					<p ng-if="customer.billingAddress.phone2"><i class="fa fa-phone"></i> {{customer.billingAddress.phone2}}</p>
+					<p ng-if="customer.billingAddress.fax"><i class="fa fa-fax"></i> {{customer.billingAddress.fax}}</p>
+				</div>
+				<div class="col-50">
+					<div class="row" id="digits">
+						<div class="col-20">
+							<span class="order-total">{{orders.inProgress.length + orders.pushed.length | number}}</span>
+						</div>
+						<div class="col-20" id="middle">
+							<span class="legend">{{ 'ORDERS' | translate }} <br>{{ 'TOTAL' | translate }}</span>
+						</div>
+						<div class="col">
+							<span class="amount">$XXXX</span> <span class="legend">{{ 'WORTH_VALUE' | translate }}</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<button class="button primary" ng-click="createOrder()">
+				{{ 'CREATE_NEW_ORDER' | translate }}
+			</button>
+
+			<div ng-if="orders.inProgress.length">
+				<p class="section">{{ 'IN_PROGRESS' | translate }}</p>
+				<div>
+					<ng-include src="'app/orders/templates/list-item.html'" ui-sref="main.orders-fill({orderId:order.localStorageId})" ng-repeat="order in orders.inProgress"></ng-include>
+				</div>
+			</div>
+
+			<div ng-if="orders.pushed.length">
+				<p class="section">{{ 'FINISHED_ORDERS' | translate }}</p>
+				<div>
+					<ng-include src="'app/orders/templates/list-item.html'" ui-sref="main.orders-view({orderId:order.localStorageId})" ng-repeat="order in orders.pushed"></ng-include>
+				</div>
+			</div>
+			
+
+		</div>
+	</ion-content>
+</ion-view>

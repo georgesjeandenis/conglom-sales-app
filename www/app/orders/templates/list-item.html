@@ -1,0 +1,15 @@
+<p class="companyname">{{order.customer.name}}</p>
+<div class="order">
+	<div class="date order-item">
+		{{order.date | date:'MM/dd'}}<span class="year">{{order.date | date:'yyyy'}}</span>
+	</div>
+	<div class="number order-item">
+		<span class="big">{{order.orderNumber}}</span> <span class="legend">{{ 'ORDER_NUMBER' | translate }}</span>
+	</div>
+	<div class="number order-item">
+		<span class="big">X</span> <span class="legend">{{ 'NUMBER_OF_ITEMS_TITLE' | translate }}</span>
+	</div>
+	<div class="amount order-item">
+		<span class="big">X</span> <span class="legend">{{ 'TOTAL_AMOUNT_TITLE' | translate }}</span>
+	</div>
+</div>
